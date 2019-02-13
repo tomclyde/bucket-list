@@ -6,11 +6,11 @@ const BucketList = function (url) {
   this.request = new RequestHelper(this.url);
 };
 
-// BucketList.prototype.bindEvents = function () {
-//   PubSub.subscribe('BucketList:item-submitted', (evt) => {
-//     this.postBucketListItem(evt.detail);
-//   })
-// };
+BucketList.prototype.bindEvents = function () {
+  PubSub.subscribe('BucketFormView:sighting-submitted', (evt) => {
+    this.postBucketListItem(evt.detail);
+  })
+};
 
 BucketList.prototype.getData = function () {
   this.request.get()
@@ -19,3 +19,15 @@ BucketList.prototype.getData = function () {
     })
     .catch(console.error);
 };
+
+BucketList.prototype.postBucketListItem = function (item) {
+  const request = new Request(this.url);
+  console.log("item" , item);
+  request.post(item)
+    .then((items) => {
+      PubSub.publish('BucketList:data-loaded', items);
+    })
+    .catch(console.error);
+};
+
+module.exports = BucketList;
