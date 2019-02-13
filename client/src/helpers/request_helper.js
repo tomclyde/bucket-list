@@ -14,7 +14,7 @@ RequestHelper.prototype.delete = function (id) {
     .then((response) => response.json());
 };
 
-Request.prototype.post = function (payload) {
+RequestHelper.prototype.post = function (payload) {
   return fetch(this.url, {
     method: 'POST',
     body: JSON.stringify(payload),
@@ -23,13 +23,13 @@ Request.prototype.post = function (payload) {
     .then((response) => response.json());
 };
 
-// Request.prototype.put = function (payload) {
-//   return fetch(`${this.url}/${id}`, {
-//     method: 'PUT',
-//     body: JSON.stringify(payload),
-//     headers: { 'Content-Type': 'application/json' }
-//   })
-//     .then((response) => response.json());
-// };
+RequestHelper.prototype.put = function (payload) {
+  return fetch(`${this.url}/${payload._id}`, {
+    method: 'PUT',
+    body: JSON.stringify(payload),
+    headers: { 'Content-Type': 'application/json' }
+  })
+    .then((response) => response.json());
+};
 
 module.exports = RequestHelper;

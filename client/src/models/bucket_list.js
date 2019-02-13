@@ -12,8 +12,13 @@ BucketList.prototype.bindEvents = function () {
   });
   PubSub.subscribe('BucketFormView:bucketitem-submitted', (evt) => {
     this.postBucketListItem(evt.detail);
-  })
+  });
+  PubSub.subscribe('bucketView:BucketView-toggleButton-clicked', (evt) => {
+    this.updateBucketItem(evt.detail);
+  });
 };
+
+
 
 BucketList.prototype.getData = function () {
   this.request.get()
@@ -35,6 +40,16 @@ BucketList.prototype.postBucketListItem = function (item) {
 
 BucketList.prototype.deleteBucketItem = function (itemId) {
   this.request.delete(itemId)
+    .then((bucketListItems) => {
+      PubSub.publish('BucketList:data-loaded', bucketListItems);
+    })
+    .catch(console.error);
+};
+
+
+BucketList.prototype.updateBucketItem = function (itemId) {
+  console.log("THIS.REQUEST:",this.request);
+  this.request.put(itemId)
     .then((bucketListItems) => {
       PubSub.publish('BucketList:data-loaded', bucketListItems);
     })

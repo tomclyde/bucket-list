@@ -13,6 +13,12 @@ BucketView.prototype.render = function (item) {
   const deleteButton = this.createDeleteButton(item._id);
   itemContainer.appendChild(deleteButton);
 
+  
+  const completedToggleButton = this.createToggleButton(item._id);
+  itemContainer.appendChild(completedToggleButton);
+  console.log(completedToggleButton);
+
+
   this.container.appendChild(itemContainer);
 };
 
@@ -39,5 +45,27 @@ BucketView.prototype.createDeleteButton = function (itemId) {
 
   return button;
 };
+
+BucketView.prototype.createToggleButton = function (itemId) {
+  const toggleButton = document.createElement('input');
+  if (toggleButton.value == "NOT DONE") {
+    toggleButton.value = "DONE";
+  } else {
+    toggleButton.value = "NOT DONE";
+  }
+
+  toggleButton.type = "button";
+  console.log("toggleButton", toggleButton);
+  // toggleButton.value = "completed";
+
+  toggleButton.addEventListener('click', (evt) => {
+    PubSub.publish('bucketView:BucketView-toggleButton-clicked', itemId, toggleButton.value);
+    console.log(toggleButton.value);
+  });
+
+  return toggleButton;
+};
+
+
 
 module.exports = BucketView;

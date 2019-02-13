@@ -16,7 +16,7 @@ h1, h2, h3 {
 }
 
 h1 {
-  color: #88ad85;
+  color: #139DDE;
   border-bottom: 1px solid #88ad85;
 }
 
@@ -32,7 +32,7 @@ input[type=submit] {
   display: block;
   border-color: transparent;
   border-radius: 5px;
-  background-color: #4D6F4A;
+  background-color: #139DDE;
   padding: 4px 10px 6px;
   margin: 1em 0;
 }
@@ -40,14 +40,17 @@ input[type=submit] {
 #bucket-list {
   display: flex;
   flex-wrap: wrap;
+
 }
 
 #item {
-  background-color: #4D6F4A;
+  background-color: #139DDE;
   border-radius: 5px;
+  flex-direction: row;
+  text-align: center;
   padding: 10px;
   margin: 20px;
-  box-shadow: 1px 1px 21px 12px rgba(77,111,74,1);
+  /* box-shadow: 1px 1px 21px 12px rgba(77,111,74,1); */
 }
 
 .delete-btn {
@@ -56,8 +59,6 @@ input[type=submit] {
   background: url(../images/delete.png);
   background-size: 20px;
 }
-
-
 
 button.delete-btn {
   border: none;
