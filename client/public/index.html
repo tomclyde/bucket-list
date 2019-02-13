@@ -8,6 +8,8 @@
   </head>
   <body>
     <h1>Bucket List</h1>
+    <div class="wrapper">
+
     <br>
     <div>
         <h2>Add a Bucket List Item</h2>
@@ -15,6 +17,10 @@
           <div>
             <label for="item">What would you like to add?</label>
             <input type="text" id="item"/>
+          </div>
+          <div class="status">
+            <label for="status" class="radio">Completed</label>
+            <input type="radio" name="status" value=""><br>
           </div>
 
           <input type="submit" value="Save" id="save"/>
@@ -24,5 +30,7 @@
     <h2>Your Bucket List</h2>
       <div id="bucket-list"></div>
     </div>
+    </div>
+
   </body>
 </html>

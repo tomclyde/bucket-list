@@ -7,12 +7,12 @@ RequestHelper.prototype.get = function () {
     .then((response) => response.json());
 };
 
-// RequestHelper.prototype.delete = function (id) {
-//   return fetch(`${this.url}/${id}`, {
-//     method: 'DELETE'
-//   })
-//     .then((response) => response.json());
-// };
+RequestHelper.prototype.delete = function (id) {
+  return fetch(`${this.url}/${id}`, {
+    method: 'DELETE'
+  })
+    .then((response) => response.json());
+};
 
 Request.prototype.post = function (payload) {
   return fetch(this.url, {

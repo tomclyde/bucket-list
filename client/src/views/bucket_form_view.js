@@ -13,7 +13,7 @@ BucketFormView.prototype.bindEvents = function () {
 BucketFormView.prototype.handleSubmit = function (evt) {
   evt.preventDefault();
   const newActivity = this.createActivity(evt.target);
-  PubSub.publish('BucketFormView:sighting-submitted', newActivity);
+  PubSub.publish('BucketFormView:bucketitem-submitted', newActivity);
   evt.target.reset();
 };
 

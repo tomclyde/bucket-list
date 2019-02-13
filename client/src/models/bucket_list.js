@@ -7,15 +7,18 @@ const BucketList = function (url) {
 };
 
 BucketList.prototype.bindEvents = function () {
-  PubSub.subscribe('BucketFormView:sighting-submitted', (evt) => {
+  PubSub.subscribe('bucketView:BucketView-delete-clicked', (evt) => {
+    this.deleteBucketItem(evt.detail);
+  });
+  PubSub.subscribe('BucketFormView:bucketitem-submitted', (evt) => {
     this.postBucketListItem(evt.detail);
   })
 };
 
 BucketList.prototype.getData = function () {
   this.request.get()
-    .then((bucketListItem) => {
-      PubSub.publish('BucketList:data-loaded', bucketListItem);
+    .then((bucketListItems) => {
+      PubSub.publish('BucketList:data-loaded', bucketListItems);
     })
     .catch(console.error);
 };
@@ -26,6 +29,14 @@ BucketList.prototype.postBucketListItem = function (item) {
   request.post(item)
     .then((items) => {
       PubSub.publish('BucketList:data-loaded', items);
+    })
+    .catch(console.error);
+};
+
+BucketList.prototype.deleteBucketItem = function (itemId) {
+  this.request.delete(itemId)
+    .then((bucketListItems) => {
+      PubSub.publish('BucketList:data-loaded', bucketListItems);
     })
     .catch(console.error);
 };
